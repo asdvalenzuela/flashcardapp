@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<style>
 	body {margin: 5%; margin-right: 20%; font-family: sans-serif;}
 	.current-cards {position:absolute;}
 	.create-new {float:right;}
-
+	.edit-card {display:None; background-color:gray; width:40%; padding:1%; margin:1%; margin-left: 5%; border-radius: 1%}
+	form {display:inline;}
 	</style>
 </head>
 <body>
@@ -22,6 +24,7 @@
 	</div>
 	<div class="current-cards">
 		<h3>Current Flash Cards</h3>
+		<button class='edit-button'>Edit Flash Cards</button>
 		<ul>
 	  		<% for @flashcard in @flashcards %>
 	    		<li>
@@ -30,9 +33,24 @@
 	    				<input type="hidden" name="_method" value="DELETE">
 	    				<input type="submit" value="Delete" title="Delete">
 	    			</form>
+	    			<div class="edit-card">
+						<h4>Edit <%= @flashcard.word %></h4>
+						<form action="/editflashcard/<%= @flashcard.id %>" method="POST">
+							<input type="hidden" name="_method" value="PUT">
+							<input type="text" name="word" value=<%= @flashcard.word %> required><br>
+							<input type="text" name="difficulty" value=<%= @flashcard.difficulty %> required><br>
+							<textarea name="definition" cols="20" rows="5" required><%= @flashcard.definition %></textarea><br>
+							<input type="submit" value="Save">
+						</form>
+					</div>
 				</li><br>
 	  		<% end %>
 		</ul>
 	</div>
+	<script>
+		$(".edit-button").click(function() {
+			$(".edit-card").toggle();
+		})
+	</script>
 </body>
 </html>

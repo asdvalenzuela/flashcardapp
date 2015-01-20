@@ -4,17 +4,17 @@ require 'data_mapper'
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/flashcards.db")
 
 class Flashcard
-  include DataMapper::Resource
-  property :id,           Serial
-  property :word,         String, :required => true
-  property :definition,	  Text, :required => true
-  property :difficulty,	  Integer, :required => true, :min => 1, :max => 10
+	include DataMapper::Resource
+	property :id,           Serial
+  	property :word,         String, :required => true
+  	property :definition,	  Text, :required => true
+  	property :difficulty,	  Integer, :required => true, :min => 1, :max => 10
 end
 DataMapper.finalize
 
 get '/' do
-  @flashcards = Flashcard.all
-  erb :index
+	@flashcards = Flashcard.all
+	erb :index
 end
 
 post '/addflashcard' do
@@ -23,6 +23,16 @@ post '/addflashcard' do
 end
 
 delete '/deleteflashcard/:id' do
-  Flashcard.get(params[:id]).destroy
-  redirect to('/')
+	Flashcard.get(params[:id]).destroy
+	redirect to('/')
+end
+
+put "/editflashcard/:id" do
+  	flashcard = Flashcard.get params[:id] 
+  
+  	flashcard.word = params[:word]
+  	flashcard.difficulty = params[:difficulty]
+ 	flashcard.definition = params[:definition]
+  	flashcard.save
+  	redirect to('/')
 end
