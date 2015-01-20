@@ -1,8 +1,19 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<style>
+	body {margin: 1%; font-family: sans-serif;}
+	</style>
 </head>
 <body>
-Hello World!
+	<h1>Flash Card Study App</h1>
+	<a href="">Start Studying</a><br>
+	<a href="">Create a New Flash Card</a>
+	<h3>Current Flash Cards</h3>
+	<ul>
+  		<% for @flashcard in @flashcards %>
+    		<li><%= '<strong>word:</strong> ' + @flashcard.word + '<br><strong> definition:</strong> ' + @flashcard.definition + '<br><strong>difficulty:</strong> ' + @flashcard.difficulty.to_s %></li><br>
+  		<% end %>
+	</ul>
 </body>
 </html>
