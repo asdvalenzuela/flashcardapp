@@ -2,18 +2,31 @@
 <html>
 <head>
 	<style>
-	body {margin: 1%; font-family: sans-serif;}
+	body {margin: 5%; margin-right: 20%; font-family: sans-serif;}
+	.current-cards {position:absolute;}
+	.create-new {float:right;}
+
 	</style>
 </head>
 <body>
 	<h1>Flash Card Study App</h1>
 	<a href="">Start Studying</a><br>
-	<a href="">Create a New Flash Card</a>
-	<h3>Current Flash Cards</h3>
-	<ul>
-  		<% for @flashcard in @flashcards %>
-    		<li><%= '<strong>word:</strong> ' + @flashcard.word + '<br><strong> definition:</strong> ' + @flashcard.definition + '<br><strong>difficulty:</strong> ' + @flashcard.difficulty.to_s %></li><br>
-  		<% end %>
-	</ul>
+	<div class="create-new">
+		<h3>Create a New Flash Card</h3>
+		<form action="/addflashcard" method="POST">
+			<input type="text" name="flashcard[word]" placeholder="Word" required><br>
+			<input type="text" name="flashcard[difficulty]" placeholder="Difficulty (1-10)" required><br>
+			<textarea name="flashcard[definition]" cols="20" rows="5" placeholder="Definition" required></textarea><br>
+			<input type="submit" value="Save">
+		</form>
+	</div>
+	<div class="current-cards">
+		<h3>Current Flash Cards</h3>
+		<ul>
+	  		<% for @flashcard in @flashcards %>
+	    		<li><%= '<strong>Word:</strong> ' + @flashcard.word + '<br><strong>Difficulty:</strong> ' + @flashcard.difficulty.to_s + '<br><strong> Definition:</strong> ' + @flashcard.definition %></li><br>
+	  		<% end %>
+		</ul>
+	</div>
 </body>
 </html>

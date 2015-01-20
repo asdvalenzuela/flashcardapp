@@ -16,3 +16,8 @@ get '/' do
   @flashcards = Flashcard.all
   erb :index
 end
+
+post '/addflashcard' do
+	Flashcard.create params[:flashcard]
+	redirect to('/')
+end
