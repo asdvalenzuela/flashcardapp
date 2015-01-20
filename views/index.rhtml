@@ -24,7 +24,13 @@
 		<h3>Current Flash Cards</h3>
 		<ul>
 	  		<% for @flashcard in @flashcards %>
-	    		<li><%= '<strong>Word:</strong> ' + @flashcard.word + '<br><strong>Difficulty:</strong> ' + @flashcard.difficulty.to_s + '<br><strong> Definition:</strong> ' + @flashcard.definition %></li><br>
+	    		<li>
+	    			<%= '<strong>Word:</strong> ' + @flashcard.word + '<br><strong>Difficulty:</strong> ' + @flashcard.difficulty.to_s + '<br><strong> Definition:</strong> ' + @flashcard.definition %><br>
+	    			<form action="/deleteflashcard/<%= @flashcard.id %>" method="POST">
+	    				<input type="hidden" name="_method" value="DELETE">
+	    				<input type="submit" value="Delete" title="Delete">
+	    			</form>
+				</li><br>
 	  		<% end %>
 		</ul>
 	</div>

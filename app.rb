@@ -21,3 +21,8 @@ post '/addflashcard' do
 	Flashcard.create params[:flashcard]
 	redirect to('/')
 end
+
+delete '/deleteflashcard/:id' do
+  Flashcard.get(params[:id]).destroy
+  redirect to('/')
+end
