@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<style>
+	body {margin: 5%; margin-right: 20%; font-family: sans-serif;}
+	.definition {display:none;}
+	</style>
+</head>
+<body>
+	<h1>Flash Card App: Random Study Mode</h1>
+	<a href="/">Back to Home</a>
+	<p id="word">Word: <%= @flashcard.word %></p>
+	<p id="difficulty">Difficulty: <%= @flashcard.difficulty %></p>
+	<button id="show-def">Show Definiton</button>
+	<button id="next">Next Word</button>
+	<div class="definition">
+		<p id="def">Definition: <%= @flashcard.definition %></p>
+	</div>
+	<script>
+		$("#show-def").click(function() {
+			$(".definition").toggle();
+		})
+		$("#next").click(function(e){
+			e.preventDefault();
+			$.get("/nextrandom", function(result) {
+				$("#word").html("Word: " + result.word);
+				$("#difficulty").html("Difficulty: " + result.difficulty);
+				$("#def").html("Definition: " + result.definition);
+				if ($(".definition").css('display') !== 'none') {
+					$(".definition").toggle();
+				}
+
+			})
+		})
+	</script>
+</body>
+</html>

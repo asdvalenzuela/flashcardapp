@@ -40,11 +40,44 @@ end
 
 get '/random' do
 	@flashcard = Flashcard.first(:offset => rand(Flashcard.count))
-	erb :studymode
+	erb :random
 end
 
-get '/pickrandom' do
+get '/nextrandom' do
   	content_type :json
   	flashcard = Flashcard.first(:offset => rand(Flashcard.count))
   	{ :word => flashcard.word, :difficulty => flashcard.difficulty, :definition => flashcard.definition}.to_json
 end
+
+get '/easy' do
+	@flashcard = Flashcard.first(:order => [ :difficulty.asc ])
+	erb :easy
+end
+
+get '/nexteasy' do
+  	content_type :json
+	flashcards = Flashcard.all(:order => [ :difficulty.asc ])
+  	flashcards.to_json
+end
+
+get '/difficult' do
+	@flashcard = Flashcard.first(:order => [ :difficulty.desc ])
+	erb :difficult
+end
+
+get '/nextdifficult' do
+  	content_type :json
+	flashcards = Flashcard.all(:order => [ :difficulty.desc ])
+  	flashcards.to_json
+end
+
+
+
+
+
+
+
+
+
+
+
