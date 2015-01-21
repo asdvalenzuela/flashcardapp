@@ -11,20 +11,24 @@
 		.definition {
 			display:none;
 		}
+		a {
+			color:#5790a8;
+		}
+		a:hover {
+			color:#a2645d;
+		}
 	</style>
 </head>
 <body>
 	<h1>Flash Card App: Study Mode</h1>
 	<a href="/">Back to Home</a>
-	<p id="word">Word: <%= @flashcard.word %></p>
-	<p id="difficulty">Difficulty: <%= @flashcard.difficulty %></p>
+	<p id="word"><strong>Word:</strong> <%= @flashcard.word %></p>
+	<p id="difficulty"><strong>Difficulty:</strong> <%= @flashcard.difficulty %></p>
 	<button id="show-def">Show Definiton</button>
 	<button id="next">Next Word</button>
 	<div class="definition">
-		<p id="def">Definition: <%= @flashcard.definition %></p>
+		<p id="def"><strong>Definition:</strong> <%= @flashcard.definition %></p>
 	</div>
-	<script>
-		<%= yield %>
-	</script>
+	<%= yield %>
 </body>
 </html>

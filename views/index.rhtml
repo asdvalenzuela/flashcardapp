@@ -17,14 +17,30 @@
 		.edit-card { 
 			display:none; 
 			background-color:#D3D3D3; 
-			width:110%; 
-			padding:1%; 
-			margin:1%; 
+			width:112%; 
 			margin-left:5%; 
-			border-radius:1% 
+			border-radius:1%;
 		}
-		form { 
-			display:inline; 
+		#edit-form { 
+			padding-left:5%;
+			padding-bottom:5%;
+		}
+		h4 {
+			color:#6f969b;
+			padding-left:5%;
+			padding-top:5%;
+		}
+		a {
+			color:#5790a8;
+		}
+		a:hover {
+			color:#a2645d;
+		}
+		.notice { 
+			color: green; 
+		}
+		.error { 
+			color: red; 
 		}
 	</style>
 </head>
@@ -36,6 +52,12 @@
 		<li><a href="/easy">Easy</a></li>
 		<li><a href="/hard">Hard</a></li>
 	</ul>
+	<% if flash[:notice] %>
+    	<p class="notice"><%= flash[:notice] %>
+	<% end %>
+	<% if flash[:error] %>
+    	<p class="error"><%= flash[:error] %>
+	<% end %>
 	<div class="create-new">
 		<h3>Create a New Flash Card</h3>
 		<form action="/addflashcard" method="POST">
@@ -58,7 +80,7 @@
 	    			</form>
 	    			<div class="edit-card">
 						<h4>Edit <%= @flashcard.word %></h4>
-						<form action="/editflashcard/<%= @flashcard.id %>" method="POST">
+						<form action="/editflashcard/<%= @flashcard.id %>" method="POST" id="edit-form">
 							<input type="hidden" name="_method" value="PUT">
 							<input type="text" name="word" value=<%= @flashcard.word %> required><br>
 							<input type="text" name="difficulty" value=<%= @flashcard.difficulty %> required><br>

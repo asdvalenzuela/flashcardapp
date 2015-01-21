@@ -1,16 +1,18 @@
-$("#show-def").click(function() {
-	$(".definition").toggle();
-})
-$("#next").click(function(e){
-	e.preventDefault();
-	$.get("/nextrandom", function(result) {
-		$("#word").html("Word: " + result.word);
-		$("#difficulty").html("Difficulty: " + result.difficulty);
-		$("#def").html("Definition: " + result.definition);
-		if ($(".definition").css('display') !== 'none') {
-			$(".definition").toggle();
-		}
-
+<script>
+	$("#show-def").click(function() {
+		$(".definition").toggle();
 	})
-})
+	$("#next").click(function(e){
+		e.preventDefault();
+		$.get("/nextrandom", function(result) {
+			$("#word").html("<strong>Word:</strong> " + result.word);
+			$("#difficulty").html("<strong>Difficulty:</strong> " + result.difficulty);
+			$("#def").html("<strong>Definition:</strong> " + result.definition);
+			if ($(".definition").css('display') !== 'none') {
+				$(".definition").toggle();
+			}
+
+		})
+	})
+</script>
 

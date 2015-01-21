@@ -1,6 +1,9 @@
 require 'sinatra'
 require 'data_mapper'
 require 'json'
+require 'sinatra/flash'
+ 
+enable :sessions
 
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/flashcards.db")
 
@@ -19,23 +22,34 @@ get '/' do
 end
 
 post '/addflashcard' do
-	Flashcard.create params[:flashcard]
-	redirect to('/')
+	flashcard = Flashcard.create params[:flashcard]
+	if flashcard.save
+		redirect to('/'), flash[:notice] = 'Flash card successfully created.'
+	else
+		redirect to('/'), flash[:error] = "The difficulty field must be between 1 and 10."
+	end
 end
 
 delete '/deleteflashcard/:id' do
-	Flashcard.get(params[:id]).destroy
-	redirect to('/')
+    flashcard = Flashcard.get params[:id]
+    if flashcard.destroy
+        redirect to('/'), flash[:notice] = 'Flash card deleted successfully.'
+    else
+        redirect to('/'), flash[:error] = 'Error deleting flash card.'
+    end
 end
 
 put '/editflashcard/:id' do
-  	flashcard = Flashcard.get params[:id]
+  	@flashcard = Flashcard.get params[:id]
   
-  	flashcard.word = params[:word]
-  	flashcard.difficulty = params[:difficulty]
- 	flashcard.definition = params[:definition]
-  	flashcard.save
-  	redirect to('/')
+  	@flashcard.word = params[:word]
+  	@flashcard.difficulty = params[:difficulty]
+ 	@flashcard.definition = params[:definition]
+  	if @flashcard.save
+  		 redirect to('/'), flash[:notice] = "Flash card successfully updated."
+  	else
+  		 redirect to('/'), flash[:error] = "The difficulty field must be between 1 and 10."
+  	end
 end
 
 get '/random' do
@@ -70,14 +84,3 @@ get '/nexthard' do
 	flashcards = Flashcard.all(:order => [ :difficulty.desc ])
   	flashcards.to_json
 end
-
-
-
-
-
-
-
-
-
-
-
