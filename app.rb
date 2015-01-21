@@ -40,7 +40,7 @@ end
 
 get '/random' do
 	@flashcard = Flashcard.first(:offset => rand(Flashcard.count))
-	erb :random
+	erb :random, {:layout => :study}
 end
 
 get '/nextrandom' do
@@ -51,7 +51,7 @@ end
 
 get '/easy' do
 	@flashcard = Flashcard.first(:order => [ :difficulty.asc ])
-	erb :easy
+	erb :easy, {:layout => :study}
 end
 
 get '/nexteasy' do
@@ -60,12 +60,12 @@ get '/nexteasy' do
   	flashcards.to_json
 end
 
-get '/difficult' do
+get '/hard' do
 	@flashcard = Flashcard.first(:order => [ :difficulty.desc ])
-	erb :difficult
+	erb :hard, {:layout => :study}
 end
 
-get '/nextdifficult' do
+get '/nexthard' do
   	content_type :json
 	flashcards = Flashcard.all(:order => [ :difficulty.desc ])
   	flashcards.to_json

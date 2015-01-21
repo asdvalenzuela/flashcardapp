@@ -5,7 +5,7 @@ var i=0;
 $("#next").click(function(e){
 	e.preventDefault();
 	i++;
-	$.get("/nexteasy", function(result) {
+	$.get("/nexthard", function(result) {
 		if (i<result.length) {
 			$("#word").html("Word: " + result[i].word);
 			$("#difficulty").html("Difficulty: " + result[i].difficulty);
@@ -19,4 +19,3 @@ $("#next").click(function(e){
 		}
 	})
 })
-
