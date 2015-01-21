@@ -27,12 +27,17 @@ delete '/deleteflashcard/:id' do
 	redirect to('/')
 end
 
-put "/editflashcard/:id" do
-  	flashcard = Flashcard.get params[:id] 
+put '/editflashcard/:id' do
+  	flashcard = Flashcard.get params[:id]
   
   	flashcard.word = params[:word]
   	flashcard.difficulty = params[:difficulty]
  	flashcard.definition = params[:definition]
   	flashcard.save
   	redirect to('/')
+end
+
+get '/random' do
+	@flashcard = Flashcard.first(:offset => rand(Flashcard.count))
+	erb :studymode
 end
