@@ -60,7 +60,7 @@
 	<% end %>
 	<div class="create-new">
 		<h3>Create a New Flash Card</h3>
-		<form action="/addflashcard" method="POST">
+		<form action="/flashcard" method="POST">
 			<input type="text" name="flashcard[word]" placeholder="Word" required><br>
 			<input type="text" name="flashcard[difficulty]" placeholder="Difficulty (1-10)" required><br>
 			<textarea name="flashcard[definition]" cols="20" rows="5" placeholder="Definition" required></textarea><br>
@@ -74,13 +74,13 @@
 	  		<% for @flashcard in @flashcards %>
 	    		<li>
 	    			<%= '<strong>Word:</strong> ' + @flashcard.word + '<br><strong>Difficulty:</strong> ' + @flashcard.difficulty.to_s + '<br><strong> Definition:</strong> ' + @flashcard.definition %><br>
-	    			<form action="/deleteflashcard/<%= @flashcard.id %>" method="POST">
+	    			<form action="/flashcard/<%= @flashcard.id %>" method="POST">
 	    				<input type="hidden" name="_method" value="DELETE">
 	    				<input type="submit" value="Delete" title="Delete">
 	    			</form>
 	    			<div class="edit-card">
 						<h4>Edit <%= @flashcard.word %></h4>
-						<form action="/editflashcard/<%= @flashcard.id %>" method="POST" id="edit-form">
+						<form action="/flashcard/<%= @flashcard.id %>" method="POST" id="edit-form">
 							<input type="hidden" name="_method" value="PUT">
 							<input type="text" name="word" value=<%= @flashcard.word %> required><br>
 							<input type="text" name="difficulty" value=<%= @flashcard.difficulty %> required><br>

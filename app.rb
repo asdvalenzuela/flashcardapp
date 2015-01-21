@@ -1,8 +1,10 @@
+require 'rubygems'
+require 'bundler/setup'
 require 'sinatra'
 require 'data_mapper'
 require 'json'
 require 'sinatra/flash'
- 
+
 enable :sessions
 
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/flashcards.db")
@@ -21,7 +23,7 @@ get '/' do
 	erb :index
 end
 
-post '/addflashcard' do
+post '/flashcard' do
 	flashcard = Flashcard.create params[:flashcard]
 	if flashcard.save
 		redirect to('/'), flash[:notice] = 'Flash card successfully created.'
@@ -30,7 +32,7 @@ post '/addflashcard' do
 	end
 end
 
-delete '/deleteflashcard/:id' do
+delete '/flashcard/:id' do
     flashcard = Flashcard.get params[:id]
     if flashcard.destroy
         redirect to('/'), flash[:notice] = 'Flash card deleted successfully.'
@@ -39,7 +41,7 @@ delete '/deleteflashcard/:id' do
     end
 end
 
-put '/editflashcard/:id' do
+put '/flashcard/:id' do
   	@flashcard = Flashcard.get params[:id]
   
   	@flashcard.word = params[:word]

@@ -36,3 +36,6 @@ Other requirements
 - Use REST principals with the flash card resource
 - This is for one user - don't worry about creating users, logging in, etc
 - We don't expect you know how to do some of these things; that's the point!
+
+Installation
+------------
