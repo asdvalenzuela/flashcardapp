@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'data_mapper'
+require 'json'
 
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/flashcards.db")
 
@@ -40,4 +41,10 @@ end
 get '/random' do
 	@flashcard = Flashcard.first(:offset => rand(Flashcard.count))
 	erb :studymode
+end
+
+get '/pickrandom' do
+  	content_type :json
+  	flashcard = Flashcard.first(:offset => rand(Flashcard.count))
+  	{ :word => flashcard.word, :difficulty => flashcard.difficulty, :definition => flashcard.definition}.to_json
 end

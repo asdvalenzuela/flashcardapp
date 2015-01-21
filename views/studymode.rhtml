@@ -8,17 +8,30 @@
 	</style>
 </head>
 <body>
-	<h1>Flash Card Study App</h1>
-	<p>Word: <%= @flashcard.word %></p>
-	<p>Difficulty: <%= @flashcard.difficulty %></p>
+	<h1>Flash Card App: Study Mode</h1>
+	<a href="/">Back to Home</a>
+	<p id="word">Word: <%= @flashcard.word %></p>
+	<p id="difficulty">Difficulty: <%= @flashcard.difficulty %></p>
 	<button id="show-def">Show Definiton</button>
 	<button id="next">Next Word</button>
 	<div class="definition">
-		<p>Definition: <%= @flashcard.definition %></p>
+		<p id="def">Definition: <%= @flashcard.definition %></p>
 	</div>
 	<script>
 		$("#show-def").click(function() {
 			$(".definition").toggle();
+		})
+		$("#next").click(function(e){
+			e.preventDefault();
+			$.get("/pickrandom", function(result) {
+				$("#word").html("Word: " + result.word);
+				$("#difficulty").html("Difficulty: " + result.difficulty);
+				$("#def").html("Definition: " + result.definition);
+				if ($(".definition").css('display') !== 'none') {
+					$(".definition").toggle();
+				}
+
+			})
 		})
 	</script>
 </body>
