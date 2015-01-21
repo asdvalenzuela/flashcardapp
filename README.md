@@ -39,3 +39,7 @@ Other requirements
 
 Installation
 ------------
+
+1. Clone this repository by typing 'git clone https://github.com/loupe/flashcard-homework-alaina.git' into your terminal, then change directories (cd) into the cloned repository.
+2. If you do not have bundler installed on your machine, type 'gem install bundler' into your terminal, then 'bundle install' after the previous operation is complete. All dependencies should be installed successfully.
+3. Type 'ruby app.rb' to run the app and navigate your browser to localhost:4567 to start using the flashcard app!
