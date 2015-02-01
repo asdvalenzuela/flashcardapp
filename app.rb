@@ -72,7 +72,7 @@ end
 
 get '/nexteasy' do
   	content_type :json
-	flashcards = Flashcard.all(:order => [ :difficulty.asc ])
+	  flashcards = Flashcard.all(:order => [ :difficulty.asc ])
   	flashcards.to_json
 end
 

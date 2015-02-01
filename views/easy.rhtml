@@ -1,4 +1,7 @@
 <script>
+	$.get("/nexteasy", function(result){
+		flashcardList = result;
+	})
 	$("#show-def").click(function() {
 		$(".definition").toggle();
 	})
@@ -6,19 +9,17 @@
 	$("#next").click(function(e){
 		e.preventDefault();
 		i++;
-		$.get("/nexteasy", function(result) {
-			if (i<result.length) {
-				$("#word").html("<strong>Word:</strong> " + result[i].word);
-				$("#difficulty").html("<strong>Difficulty:</strong> " + result[i].difficulty);
-				$("#def").html("<strong>Definition:</strong> " + result[i].definition);
-				if ($(".definition").css('display') !== 'none') {
-					$(".definition").toggle();
-				}
+		if (i<flashcardList.length) {
+			$("#word").html("<strong>Word:</strong> " + flashcardList[i].word);
+			$("#difficulty").html("<strong>Difficulty:</strong> " + flashcardList[i].difficulty);
+			$("#def").html("<strong>Definition:</strong> " + flashcardList[i].definition);
+			if ($(".definition").css('display') !== 'none') {
+				$(".definition").toggle();
 			}
-			else {
-				alert("Good job! You went through all the flashcards.")
-			}
-		})
+		}
+		else {
+			alert("Good job! You went through all the flashcards.")
+		}
 	})
 </script>
 
