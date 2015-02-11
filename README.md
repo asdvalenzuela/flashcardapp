@@ -1,4 +1,4 @@
-A Simple Flashcard Web App!
+A Simple Flashcard Web App
 ===========================
 
 A simple way to keep track of words and definitions that I'm trying to memorize. 
