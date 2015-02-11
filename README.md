@@ -27,6 +27,13 @@ Tech stack
 Installation
 ------------
 
-1. Clone this repository by typing 'git clone https://github.com/loupe/flashcard-homework-alaina.git' into your terminal, then change directories (cd) into the cloned repository.
-2. If you do not have bundler installed on your machine, type 'gem install bundler' into your terminal, then 'bundle install' after the previous operation is complete. All dependencies should be installed successfully.
-3. Type 'ruby app.rb' to run the app and navigate your browser to localhost:4567 to start using the flashcard app!
+1. Clone this repository
+	`$ git clone https://github.com/loupe/flashcard-homework-alaina.git`
+2. cd into the directory
+	`$ cd flashcard-homework-alaina`
+3. Use bundler to install dependencies
+	`$ gem install bundler`
+	`$ bundle install` 
+4. Start up the app 
+	`$ ruby app.rb` 
+5. Navigate to localhost:4567 to use the flashcard app

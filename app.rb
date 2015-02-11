@@ -46,7 +46,7 @@ put '/flashcard/:id' do
   
   	@flashcard.word = params[:word]
   	@flashcard.difficulty = params[:difficulty]
- 	@flashcard.definition = params[:definition]
+ 	  @flashcard.definition = params[:definition]
   	if @flashcard.save
   		 redirect to('/'), flash[:notice] = "Flash card successfully updated."
   	else
